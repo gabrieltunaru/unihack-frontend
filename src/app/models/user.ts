@@ -1,3 +1,5 @@
+import DateTimeFormat = Intl.DateTimeFormat;
+
 export class User {
   public userName: string;
   public email: string;
@@ -19,4 +21,11 @@ export class TrimmedUser {
     this.username = name;
     this.password = password;
   }
+}
+
+export class Profile {
+  name: string;
+  birthDate: Date;
+  phone: number;
+  city: string;
 }

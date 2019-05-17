@@ -12,10 +12,10 @@ export class RegistrationFormComponent implements OnInit {
 
   registrationForm = new FormGroup(
     {
-      username: new FormControl('username'),
-      email: new FormControl('email'),
-      password: new FormControl('password'),
-      confirmPassword: new FormControl('confirmPassword')
+      username: new FormControl(),
+      email: new FormControl(),
+      password: new FormControl(),
+      confirmPassword: new FormControl()
     }
   );
 
