@@ -12,6 +12,7 @@ import {HttpModule} from '@angular/http';
 import {RestService} from './services/rest.service';
 import {LoginComponent} from './components/login/login.component';
 import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
+import { CertificateRequestPageComponent } from './components/certificate-request-page/certificate-request-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
     HomeComponent,
     NavbarComponent,
     RegistrationFormComponent,
-    LoginComponent
+    LoginComponent,
+    CertificateRequestPageComponent
   ],
   imports: [
     BrowserModule,

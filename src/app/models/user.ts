@@ -25,7 +25,6 @@ export class TrimmedUser {
 
 export class Profile {
   name: string;
-  birthDate: Date;
-  phone: number;
-  city: string;
+  cnp: number;
+  department: string;
 }
