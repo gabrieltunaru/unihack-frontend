@@ -5,16 +5,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
+import {HttpClientModule} from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {RestService} from './services/rest.service';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    RegistrationFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
