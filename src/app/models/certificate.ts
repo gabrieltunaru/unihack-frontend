@@ -7,7 +7,7 @@ export class Certificate {
   name: string;
   studyYear: string;
   universityYear: string;
-  frequency: boolean;
+  frequency: string;
   mentions: string;
   purpose: string;
 }
