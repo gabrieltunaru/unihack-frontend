@@ -1,7 +1,7 @@
 import DateTimeFormat = Intl.DateTimeFormat;
 
 export class Certificate {
-  nr: string;
+  id?: number;
   created?: DateTimeFormat;
   specialization: string;
   name: string;

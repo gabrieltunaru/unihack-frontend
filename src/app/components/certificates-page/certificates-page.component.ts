@@ -15,28 +15,44 @@ export class CertificatesPageComponent implements OnInit {
   private selectedOption;
 
   constructor(private rest: RestService) {
-    this.certificates = this.getCertificates();
   }
+
 
   statusForm = new FormGroup({
     status: new FormControl()
   });
 
+  allStatusForm = new FormGroup({
+    status: new FormControl()
+  });
+
+
   ngOnInit() {
     console.log(sessionStorage.getItem('jwt'));
   }
 
-  public getCertificates() {
-    return this.rest.getAllCertificates().subscribe(data => this.certificates = data);
-  }
-
-  public print() {
+  public getCertificates(status?) {
+    return this.rest.getCertificatesByStatus(status)
+      .subscribe(data => {this.certs = JSON.parse(data['body']);
+      console.log(this.certs)});
+    console.log('ow9uer832947');
     console.log(this.certs);
-    this.certs = JSON.parse(this.certificates.body);
   }
 
-  public send(certificate: Certificate, status: string) {
-  console.log(this.statusForm.getRawValue().status);
+  public send(certificate: Certificate) {
+    const ids = [certificate.id];
+    const status = this.statusForm.getRawValue().status;
+    this.rest.modifyCertificatesStatus({ids, status}).subscribe(data => console.log(data));
+  }
+
+  public setAllAs() {
+    const status = this.allStatusForm.getRawValue().status;
+    this.certs.forEach(x => x.status = status);
+    const ids = this.certs.map(x => x.id);
+    const wut = {ids, status};
+    this.rest.modifyCertificatesStatus(wut).subscribe(data => console.log(data));
+    console.log(ids);
+    console.log(this.certs);
   }
 
 }

@@ -1,16 +1,33 @@
 <div class="container-fluid">
-  certificates-page works!
-  <button type="submit" class="btn btn-success" (click)="getCertificates()">Submit</button>
-  <button type="submit" class="btn btn-success" (click)="print()">Print</button>
-  <table class="table">
+  <div class="buttons">
+    <button type="submit" class="btn btn-success" (click)="getCertificates('any')">Show All</button>
+    <button type="submit" class="btn btn-success" (click)="getCertificates('pending')">Show Pending</button>
+    <button type="submit" class="btn btn-success" (click)="getCertificates('signing')">Show Signing</button>
+    <button type="submit" class="btn btn-success" (click)="getCertificates('ready')">Show Ready</button>
+    <button type="submit" class="btn btn-success" (click)="getCertificates('rejected')">Show Rejected</button>
+  </div>
+  <div class="buttons align-items-center justify-content-center">
+    <button type="submit" class="btn btn-success" (click)="setAllAs()">Set all as</button>
+    <form [formGroup]="allStatusForm">
+      <div class="form-group mb-0">
+        <select class="custom-select" formControlName="status" required>
+          <option value="pending">Pending</option>
+          <option value="signing">Signing</option>
+          <option value="ready">Ready</option>
+          <option value="ready">Rejected</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <table class="table container-fluid">
     <thead>
     <tr>
       <th scope="col">nr</th>
       <th scope="col">date</th>
       <th scope="col">specialization</th>
       <th scope="col">name</th>
-      <th scope="col">studyYear</th>
-      <th scope="col">universityYear</th>
+      <th scope="col">study Year</th>
+      <th scope="col">university Year</th>
       <th scope="col">frequency</th>
       <th scope="col">mentions</th>
       <th scope="col">purpose</th>
@@ -20,7 +37,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let certificate of certs">
-      <th scope="row">{{certificate.nr}}</th>
+      <th scope="row">{{certificate.id}}</th>
       <th scope="row">{{certificate.created | date : 'medium'}}</th>
       <th scope="row">{{certificate.specialization}}</th>
       <th scope="row">{{certificate.name}}</th>
@@ -32,17 +49,17 @@
       <th scope="row">
         <form [formGroup]="statusForm">
           <div class="form-group">
-            <select class="custom-select" [ngModel]="certificate.status" formControlName="status" required>
+            <select class="custom-select" [value]='certificate.status' formControlName="status" required>
               <option value="pending">Pending</option>
               <option value="signing">Signing</option>
               <option value="ready">Ready</option>
-              <option value="ready">Rejected</option>
+              <option value="rejected">Rejected</option>
             </select>
           </div>
         </form>
       </th>
       <th scope="row">
-        <button type="submit" class="btn btn-success" (click)="send(certificate,certificate.status)" >Send</button>
+        <button type="submit" class="btn btn-success" (click)="send(certificate)">Send</button>
       </th>
     </tr>
     </tbody>

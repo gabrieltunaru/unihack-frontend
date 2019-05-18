@@ -58,10 +58,16 @@ export class RestService {
   }
 
   public getAllCertificates(): Observable<HttpEvent<Certificate>> {
-    return this.http.get<Certificate>(this.endpoint + 'Certificates/GetLatestCertificates', this.httpOptionsBizdoc);
+    return this.http.get<Certificate>(this.endpoint + 'Certificates/GetCertificates', this.httpOptionsBizdoc);
   }
 
-  public modifyCertificateStatus() {
-    return this.http.patch(this.endpoint + 'Certificates/???', this.httpOptionsBizdoc);
+  public getCertificatesByStatus(status: string): Observable<HttpEvent<Certificate>> {
+    return this.http.get<Certificate>(this.endpoint + 'Certificates/GetCertificates?status=' + status, this.httpOptionsBizdoc);
+  }
+
+  public modifyCertificatesStatus(wut: any) {
+    return this.http.patch(
+      this.endpoint + 'Certificates/PatchStatus', wut, this.httpOptionsBizdoc
+    );
   }
 }
