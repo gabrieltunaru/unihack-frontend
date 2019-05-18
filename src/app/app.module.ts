@@ -13,6 +13,8 @@ import {RestService} from './services/rest.service';
 import {LoginComponent} from './components/login/login.component';
 import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import { CertificateRequestPageComponent } from './components/certificate-request-page/certificate-request-page.component';
+import { CertificatesPageComponent } from './components/certificates-page/certificates-page.component';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { CertificateRequestPageComponent } from './components/certificate-reques
     NavbarComponent,
     RegistrationFormComponent,
     LoginComponent,
-    CertificateRequestPageComponent
+    CertificateRequestPageComponent,
+    CertificatesPageComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

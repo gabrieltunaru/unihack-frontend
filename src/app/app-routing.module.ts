@@ -4,12 +4,14 @@ import {HomeComponent} from './components/home/home.component';
 import {RegistrationFormComponent} from './components/registration-form/registration-form.component';
 import {LoginComponent} from './components/login/login.component';
 import {CertificateRequestPageComponent} from './components/certificate-request-page/certificate-request-page.component';
+import {CertificatesPageComponent} from './components/certificates-page/certificates-page.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'register', component: RegistrationFormComponent},
-  {path: 'login', component:LoginComponent},
-  {path: 'certificate-request', component:CertificateRequestPageComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'certificate-request', component: CertificateRequestPageComponent},
+  {path: 'certificates', component: CertificatesPageComponent}
 ];
 
 @NgModule({

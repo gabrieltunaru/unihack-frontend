@@ -17,6 +17,9 @@
           <a class="nav-link" routerLink="certificate-request" routerLinkActive="active">Request Certificate</a>
         </li>
         <li class="nav-item active">
+          <a *ngIf="loggedIn()" class="nav-link" routerLink="certificates" routerLinkActive="active">Certificates</a>
+        </li>
+        <li class="nav-item active">
           <a *ngIf="loggedIn()" class="nav-link" (click)="logout()" >Logout</a>
         </li>
       </ul>
