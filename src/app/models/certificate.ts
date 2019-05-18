@@ -2,13 +2,14 @@ import DateTimeFormat = Intl.DateTimeFormat;
 
 export class Certificate {
   nr: string;
-  date: DateTimeFormat;
+  created?: DateTimeFormat;
   specialization: string;
   name: string;
-  studyYear: string;
-  universityYear: string;
+  studyYear: number;
   frequency: string;
+  universityYear?: number;
   mentions: string;
   purpose: string;
+  status: string;
 }
 

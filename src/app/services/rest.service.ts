@@ -14,14 +14,24 @@ export class RestService {
   private endpoint;
   private httpOptions;
   private httpOptionsLogIn;
-  private authToken ;
+  private httpOptionsBizdoc;
+  private authToken;
+
   constructor(private http: HttpClient) {
     this.authToken = sessionStorage.getItem('jwt');
-    this.endpoint = 'http://192.168.6.155:5090/api/';
+    this.endpoint = '/api/';
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.authToken
+      }),
+      observe: 'response',
+      responseType: 'text'
+    };
+    this.httpOptionsBizdoc = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'bearer ' + this.authToken
       }),
       observe: 'response',
       responseType: 'text'
@@ -44,6 +54,14 @@ export class RestService {
   }
 
   public addCertificate(certificate: Certificate): Observable<HttpEvent<Certificate>> {
-    return this.http.post<Certificate>(this.endpoint + 'Certificates/AddCertificate', certificate, this.httpOptions);
+    return this.http.post<Certificate>(this.endpoint + 'Certificates/AddCertificate', certificate, this.httpOptionsBizdoc);
+  }
+
+  public getAllCertificates(): Observable<HttpEvent<Certificate>> {
+    return this.http.get<Certificate>(this.endpoint + 'Certificates/GetLatestCertificates', this.httpOptionsBizdoc);
+  }
+
+  public modifyCertificateStatus() {
+    return this.http.patch(this.endpoint + 'Certificates/???', this.httpOptionsBizdoc);
   }
 }
