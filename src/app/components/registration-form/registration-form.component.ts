@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {RestService} from '../../services/rest.service';
 import {User} from '../../models/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registration-form',
@@ -19,7 +20,8 @@ export class RegistrationFormComponent implements OnInit {
     }
   );
 
-  constructor(private rest: RestService) {
+  constructor(private rest: RestService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -35,6 +37,7 @@ export class RegistrationFormComponent implements OnInit {
     this.rest.registerUser(user).subscribe((
       data => {
         console.log(data);
+        this.router.navigateByUrl('/login');
       })
     );
   }

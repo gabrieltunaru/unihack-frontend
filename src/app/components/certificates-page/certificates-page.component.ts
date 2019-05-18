@@ -31,12 +31,10 @@ export class CertificatesPageComponent implements OnInit {
     console.log(sessionStorage.getItem('jwt'));
   }
 
-  public getCertificates(status?) {
+  public getCertificates(status) {
+    console.log(sessionStorage.getItem('jwt'));
     return this.rest.getCertificatesByStatus(status)
-      .subscribe(data => {this.certs = JSON.parse(data['body']);
-      console.log(this.certs)});
-    console.log('ow9uer832947');
-    console.log(this.certs);
+      .subscribe(data => this.certs = JSON.parse(data['body']));
   }
 
   public send(certificate: Certificate) {
