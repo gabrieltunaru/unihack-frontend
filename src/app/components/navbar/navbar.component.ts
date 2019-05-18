@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {GlobalService} from '../../services/global.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,18 +9,20 @@ import {Component, OnInit} from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() {
+  constructor(private gs: GlobalService,
+              private router: Router) {
   }
 
   ngOnInit() {
   }
 
   public loggedIn() {
-    return sessionStorage.getItem('jwt') != null;
+    return GlobalService.isLoggedIn();
   }
 
   public logout() {
     sessionStorage.removeItem('jwt');
+    this.router.navigateByUrl('/home');
   }
 
 }

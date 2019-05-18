@@ -13,6 +13,7 @@ export class RestService {
 
   private endpoint;
   private httpOptions;
+  private httpOptionsLogIn;
   private authToken ;
   constructor(private http: HttpClient) {
     this.authToken = sessionStorage.getItem('jwt');
@@ -25,6 +26,13 @@ export class RestService {
       observe: 'response',
       responseType: 'text'
     };
+    this.httpOptionsLogIn = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      observe: 'response',
+      responseType: 'text'
+    };
   }
 
   public registerUser(user: User): Observable<User> {
@@ -32,7 +40,7 @@ export class RestService {
   }
 
   public login(user: TrimmedUser): Observable<HttpEvent<TrimmedUser>> {
-    return this.http.post<TrimmedUser>(this.endpoint + 'Auth/Login', user, this.httpOptions);
+    return this.http.post<TrimmedUser>(this.endpoint + 'Auth/Login', user, this.httpOptionsLogIn);
   }
 
   public addCertificate(certificate: Certificate): Observable<HttpEvent<Certificate>> {

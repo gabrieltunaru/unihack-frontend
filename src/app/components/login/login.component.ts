@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {TrimmedUser, User} from '../../models/user';
 import {RestService} from '../../services/rest.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     }
   );
 
-  constructor(private rest: RestService) {
+  constructor(private rest: RestService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -38,5 +40,6 @@ export class LoginComponent implements OnInit {
         console.log(this.role);
         sessionStorage.setItem('jwt', this.authToken);
       });
+    this.router.navigateByUrl('/home');
   }
 }
