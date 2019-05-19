@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
         console.log(this.role);
         localStorage.setItem('jwt', this.authToken);
         this.rest.setHttpOptions();
+        localStorage.setItem('userName', user.username);
       });
     this.router.navigateByUrl('/home');
     this.rest.setHttpOptions();

@@ -10,9 +10,12 @@ import {RestService} from '../../services/rest.service';
 })
 export class NavbarComponent implements OnInit {
 
+  public name;
+
   constructor(public gs: GlobalService,
               private rest: RestService,
               private router: Router) {
+    this.name = localStorage.getItem('userName');
   }
 
   ngOnInit() {

@@ -6,7 +6,6 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
 }
 
 .wrapper{
@@ -16,6 +15,18 @@
   background-color: #f2f2f2;
 }
 
+.container{
+  height: 100vh;
+}
+
 .h1 {
   margin-bottom: 25px;
+}
+
+.inner-wrapper{
+  border-radius: 20px;
+  border-color: black;
+  background: #9da6af;
+  padding: 25px;
+  box-shadow: 11px 13px 15px 3px rgba(46,38,46,0.75);
 }
