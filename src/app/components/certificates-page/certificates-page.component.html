@@ -1,13 +1,13 @@
 <div class="container">
   <div class="buttons">
-    <button type="submit" class="btn btn-success" (click)="getCertificates('any')">Show All</button>
-    <button type="submit" class="btn btn-success" (click)="getCertificates('pending')">Show Pending</button>
-    <button type="submit" class="btn btn-success" (click)="getCertificates('signing')">Show Signing</button>
-    <button type="submit" class="btn btn-success" (click)="getCertificates('ready')">Show Ready</button>
-    <button type="submit" class="btn btn-success" (click)="getCertificates('rejected')">Show Rejected</button>
+    <button type="submit" class="btn btn-dark btn-success" (click)="getCertificates('any')">Show All</button>
+    <button type="submit" class="btn btn-dark btn-success" (click)="getCertificates('pending')">Show Pending</button>
+    <button type="submit" class="btn btn-dark btn-success" (click)="getCertificates('signing')">Show Signing</button>
+    <button type="submit" class="btn btn-dark btn-success" (click)="getCertificates('ready')">Show Ready</button>
+    <button type="submit" class="btn btn-dark btn-success" (click)="getCertificates('rejected')">Show Rejected</button>
   </div>
   <div class="buttons align-items-center justify-content-center" *ngIf="isSuperUser()">
-    <button type="submit" class="btn btn-success" (click)="setAllAs()">Set all as</button>
+    <button type="submit" class="btn btn-dark btn-success" (click)="setAllAs()">Set all as</button>
     <form [formGroup]="allStatusForm">
       <div class="form-group mb-0">
         <select class="custom-select" formControlName="status" required>
@@ -18,7 +18,7 @@
         </select>
       </div>
     </form><
-    <button type="submit" class="btn btn-success" (click)="filterSpecializations()">Select specialization</button>
+    <button type="submit" class="btn btn-success btn-dark" (click)="filterSpecializations()">Select specialization</button>
     <form [formGroup]="specializationForm">
       <div class="form-group mb-0">
         <select class="custom-select" formControlName="specialization" required>
@@ -71,7 +71,7 @@
         </form>
       </th>
       <th scope="row">
-        <button type="submit" class="btn btn-success" (click)="send(certificate)">Send</button>
+        <button type="submit" class="btn btn-success btn-dark" (click)="send(certificate)">Send</button>
       </th>
     </tr>
     </tbody>
