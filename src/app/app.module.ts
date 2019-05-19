@@ -15,6 +15,7 @@ import {JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import { CertificateRequestPageComponent } from './components/certificate-request-page/certificate-request-page.component';
 import { CertificatesPageComponent } from './components/certificates-page/certificates-page.component';
 import { TableComponent } from './components/table/table.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TableComponent } from './components/table/table.component';
     LoginComponent,
     CertificateRequestPageComponent,
     CertificatesPageComponent,
-    TableComponent
+    TableComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

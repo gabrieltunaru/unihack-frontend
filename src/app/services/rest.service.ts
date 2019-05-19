@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
-import {TrimmedUser, User} from '../models/user';
+import {Profile, TrimmedUser, User} from '../models/user';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {text} from '@angular/core/src/render3';
@@ -17,9 +17,8 @@ export class RestService {
   private httpOptionsBizdoc;
   private authToken;
 
-  constructor(private http: HttpClient) {
-    this.authToken = sessionStorage.getItem('jwt');
-    this.endpoint = '/api/';
+  public setHttpOptions() {
+
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -43,6 +42,12 @@ export class RestService {
       observe: 'response',
       responseType: 'text'
     };
+  }
+
+  constructor(private http: HttpClient) {
+    this.authToken = localStorage.getItem('jwt');
+    this.endpoint = '/api/';
+    this.setHttpOptions();
   }
 
   public registerUser(user: User): Observable<User> {
@@ -69,5 +74,9 @@ export class RestService {
     return this.http.patch(
       this.endpoint + 'Certificates/PatchStatus', wut, this.httpOptionsBizdoc
     );
+  }
+
+  public modifyProfile(profile: Profile): Observable<HttpEvent<Profile>> {
+    return this.http.post<Profile>(this.endpoint + 'UserProfile/AddUserProfile', profile, this.httpOptionsBizdoc);
   }
 }

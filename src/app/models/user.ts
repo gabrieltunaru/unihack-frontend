@@ -25,6 +25,7 @@ export class TrimmedUser {
 
 export class Profile {
   name: string;
-  cnp: number;
-  department: string;
+  specialization: string;
+  studyYear: string;
+  frequency: string;
 }

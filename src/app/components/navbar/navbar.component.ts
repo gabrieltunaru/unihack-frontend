@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private gs: GlobalService,
+  constructor(public gs: GlobalService,
               private router: Router) {
   }
 
@@ -21,8 +21,7 @@ export class NavbarComponent implements OnInit {
   }
 
   public logout() {
-    sessionStorage.removeItem('jwt');
-    sessionStorage.clear();
+    localStorage.removeItem('jwt');
     localStorage.clear();
     this.router.navigateByUrl('/home');
   }

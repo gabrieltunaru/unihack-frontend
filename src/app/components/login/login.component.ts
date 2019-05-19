@@ -38,8 +38,10 @@ export class LoginComponent implements OnInit {
         this.role = this.helper.decodeToken(this.authToken);
         console.log(this.authToken);
         console.log(this.role);
-        sessionStorage.setItem('jwt', this.authToken);
+        localStorage.setItem('jwt', this.authToken);
+        this.rest.setHttpOptions();
       });
     this.router.navigateByUrl('/home');
+    this.rest.setHttpOptions();
   }
 }

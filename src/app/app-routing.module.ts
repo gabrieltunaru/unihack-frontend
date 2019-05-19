@@ -5,13 +5,15 @@ import {RegistrationFormComponent} from './components/registration-form/registra
 import {LoginComponent} from './components/login/login.component';
 import {CertificateRequestPageComponent} from './components/certificate-request-page/certificate-request-page.component';
 import {CertificatesPageComponent} from './components/certificates-page/certificates-page.component';
+import {ProfileComponent} from './components/profile/profile.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'register', component: RegistrationFormComponent},
   {path: 'login', component: LoginComponent},
   {path: 'certificate-request', component: CertificateRequestPageComponent},
-  {path: 'certificates', component: CertificatesPageComponent}
+  {path: 'certificates', component: CertificatesPageComponent},
+  {path: 'profile', component: ProfileComponent}
 ];
 
 @NgModule({

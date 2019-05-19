@@ -19,12 +19,8 @@ export class CertificateRequestPageComponent implements OnInit {
 
   loginForm = new FormGroup(
     {
-      specialization: new FormControl(),
-      name: new FormControl(),
-      study_year: new FormControl(),
       mentions: new FormControl(),
       purpose: new FormControl(),
-      course_type: new FormControl(),
     }
   );
 
