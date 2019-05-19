@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GlobalService} from '../../services/global.service';
 import {Router} from '@angular/router';
+import {RestService} from '../../services/rest.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +11,7 @@ import {Router} from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   constructor(public gs: GlobalService,
+              private rest: RestService,
               private router: Router) {
   }
 
@@ -23,7 +25,9 @@ export class NavbarComponent implements OnInit {
   public logout() {
     localStorage.removeItem('jwt');
     localStorage.clear();
+    this.rest.setHttpOptions();
     this.router.navigateByUrl('/home');
+    localStorage.clear();
   }
 
 }

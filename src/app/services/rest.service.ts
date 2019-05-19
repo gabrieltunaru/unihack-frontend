@@ -17,8 +17,13 @@ export class RestService {
   private httpOptionsBizdoc;
   private authToken;
 
+
+  // public resetHttpOption(){
+  //   this.setHttpOptions() =
+  // }
   public setHttpOptions() {
 
+    this.authToken = localStorage.getItem('jwt');
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -45,7 +50,6 @@ export class RestService {
   }
 
   constructor(private http: HttpClient) {
-    this.authToken = localStorage.getItem('jwt');
     this.endpoint = '/api/';
     this.setHttpOptions();
   }

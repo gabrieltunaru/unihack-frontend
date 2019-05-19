@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
+    localStorage.removeItem('jwt');
+    localStorage.clear();
     const temp = this.loginForm.getRawValue();
     const user = new TrimmedUser(temp.username, temp.password);
     this.rest.login(user).subscribe(
