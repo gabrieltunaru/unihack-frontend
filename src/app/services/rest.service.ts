@@ -83,4 +83,9 @@ export class RestService {
   public modifyProfile(profile: Profile): Observable<HttpEvent<Profile>> {
     return this.http.post<Profile>(this.endpoint + 'UserProfile/AddUserProfile', profile, this.httpOptionsBizdoc);
   }
+
+
+  public getProfile(): Observable<HttpEvent<Profile>> {
+    return this.http.get<Profile>(this.endpoint + 'UserProfile/GetProfile' + status, this.httpOptionsBizdoc);
+  }
 }

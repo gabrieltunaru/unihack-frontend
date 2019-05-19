@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {RestService} from '../../services/rest.service';
 import {Router} from '@angular/router';
-import {User} from '../../models/user';
+import {Profile, User} from '../../models/user';
 
 @Component({
   selector: 'app-profile',
@@ -20,8 +20,13 @@ export class ProfileComponent implements OnInit {
     }
   );
 
+  public profile;
+
   constructor(private rest: RestService,
               private router: Router) {
+    this.rest.getProfile().subscribe(data => {
+      this.profile = JSON.parse(data['body']);
+    });
   }
 
   ngOnInit() {
@@ -31,5 +36,6 @@ export class ProfileComponent implements OnInit {
     this.rest.modifyProfile(this.profileForm.getRawValue()).subscribe(
       data => console.log(data)
     );
+    console.log(this.profile);
   }
 }

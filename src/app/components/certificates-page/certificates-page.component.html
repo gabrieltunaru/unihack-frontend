@@ -17,7 +17,7 @@
           <option value="rejected">Rejected</option>
         </select>
       </div>
-    </form><
+    </form>
     <button type="submit" class="btn btn-success btn-dark" (click)="filterSpecializations()">Select specialization</button>
     <form [formGroup]="specializationForm">
       <div class="form-group mb-0">
@@ -27,6 +27,17 @@
           <option value="cti-en">CTI-EN</option>
           <option value="info">INFO</option>
           <option value="is">IS</option>
+        </select>
+      </div>
+    </form><button type="submit" class="btn btn-success btn-dark" (click)="filterStatus()">Select status</button>
+    <form [formGroup]="statusForm2">
+      <div class="form-group mb-0">
+        <select class="custom-select" formControlName="status" required>
+          <option value="all">All</option>
+          <option value="pending">Pending</option>
+          <option value="signing">Signing</option>
+          <option value="ready">Ready</option>
+          <option value="rejected">Rejected</option>
         </select>
       </div>
     </form>

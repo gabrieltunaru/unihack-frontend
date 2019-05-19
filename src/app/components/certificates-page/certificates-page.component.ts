@@ -25,6 +25,11 @@ export class CertificatesPageComponent implements OnInit {
     status: new FormControl()
   });
 
+
+  statusForm2 = new FormGroup({
+    status: new FormControl()
+  });
+
   allStatusForm = new FormGroup({
     status: new FormControl()
   });
@@ -68,6 +73,13 @@ export class CertificatesPageComponent implements OnInit {
   public filterSpecializations() {
     this.certs = this.certs.filter(
       x => x.specialization === this.specializationForm.getRawValue().specialization
+    );
+  }
+
+
+  public filterStatus() {
+    this.certs = this.certs.filter(
+      x => x.status === this.statusForm2.getRawValue().status
     );
   }
 
