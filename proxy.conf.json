@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "http://192.168.6.117:5090",
+    "target": "https://adeverinte.bizdoc.ro",
     "secure": false,
     "logLevel": "debug"
   }

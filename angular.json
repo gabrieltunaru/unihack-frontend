@@ -137,5 +137,12 @@
       }
     }
   },
-  "defaultProject": "unihack-frontend"
+  "defaultProject": "unihack-frontend",
+  "schematics": {
+    "@schematics/angular": {
+      "component": {
+        "spec": false
+      }
+    }
+  }
 }

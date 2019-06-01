@@ -50,7 +50,7 @@ export class RestService {
   }
 
   constructor(private http: HttpClient) {
-    this.endpoint = '/api/';
+    this.endpoint = 'https://adeverinte.bizdoc.ro/api/';
     this.setHttpOptions();
   }
 
@@ -59,7 +59,7 @@ export class RestService {
   }
 
   public login(user: TrimmedUser): Observable<HttpEvent<TrimmedUser>> {
-    return this.http.post<TrimmedUser>(this.endpoint + 'Auth/Login', user, this.httpOptionsLogIn);
+    return this.http.post<TrimmedUser>(this.endpoint + 'Auth/LogIn', user, this.httpOptionsLogIn);
   }
 
   public addCertificate(certificate: Certificate): Observable<HttpEvent<Certificate>> {
