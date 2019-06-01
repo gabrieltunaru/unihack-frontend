@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title">Adeverinta de student <br> <b>{{certificate.name}}</b></h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>
+      Studenta/Studentul
+    <b>{{certificate.name}}</b>
+    este înscris/ă în anul universitar
+    <b>{{certificate.universityYear}}</b>
+    în anul
+    <b>{{certificate.studyYear}}</b>
+    de studii, cursuri
+    <b>{{certificate.frequency}}</b>.
+    <br>
+    Menţiuni:
+    <b>{{certificate.mentions}}</b>
+    <br>
+      Adeverinţa se eliberează pentru a-i servi la:
+    <b>{{certificate.purpose}}</b>
+  </p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

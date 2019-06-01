@@ -5,6 +5,9 @@ import {Certificate} from '../../models/certificate';
 import {FormControl, FormGroup} from '@angular/forms';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {GlobalService} from '../../services/global.service';
+import {MatDialog} from '@angular/material';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {CertificateModalBootstrapComponent} from '../certificate-modal-bootstrap/certificate-modal-bootstrap.component';
 
 @Component({
   selector: 'app-certificates-page',
@@ -17,7 +20,10 @@ export class CertificatesPageComponent implements OnInit {
   private selectedOption;
 
   constructor(private rest: RestService,
-              private gb: GlobalService) {
+              private gb: GlobalService,
+              public dialog: MatDialog,
+              public modalService: NgbModal) {
+    this.getCertificates('any');
   }
 
 
@@ -40,8 +46,6 @@ export class CertificatesPageComponent implements OnInit {
   });
 
   ngOnInit() {
-    console.log(localStorage.getItem('jwt'));
-    this.isSuperUser();
   }
 
   public getCertificates(status) {
@@ -81,6 +85,13 @@ export class CertificatesPageComponent implements OnInit {
     this.certs = this.certs.filter(
       x => x.status === this.statusForm2.getRawValue().status
     );
+  }
+
+
+  open(cert: Certificate) {
+     const modalRef =
+      this.modalService.open(CertificateModalBootstrapComponent);
+     modalRef.componentInstance.certificate = cert;
   }
 
 }

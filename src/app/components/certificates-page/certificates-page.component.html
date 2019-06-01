@@ -71,7 +71,7 @@
       <th scope="row">{{certificate.purpose}}</th>
       <th scope="row" *ngIf="!isSuperUser()">{{certificate.status}}</th>
       <th scope="row" *ngIf="isSuperUser()">
-        <form [formGroup]="statusForm">
+      <form [formGroup]="statusForm">
           <div class="form-group">
             <select class="custom-select" [value]='certificate.status' formControlName="status" required>
               <option value="pending">Pending</option>
@@ -84,6 +84,10 @@
       </th>
       <th scope="row" *ngIf="isSuperUser()">
         <button type="submit" class="btn btn-success btn-dark" (click)="send(certificate)">Send</button>
+      </th>
+      <th scope="row">
+        <!--<app-certificate-modal [certificate]="certificate"></app-certificate-modal>-->
+        <button class="btn btn-success btn-dark" (click)="open(certificate)">Vezi</button>
       </th>
     </tr>
     </tbody>
