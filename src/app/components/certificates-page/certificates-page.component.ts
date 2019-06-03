@@ -17,6 +17,7 @@ import {CertificateModalBootstrapComponent} from '../certificate-modal-bootstrap
 export class CertificatesPageComponent implements OnInit {
   public certificates;
   public certs: Certificate[];
+  private certsCopy: Certificate[];
   private selectedOption;
 
   constructor(private rest: RestService,
@@ -24,6 +25,8 @@ export class CertificatesPageComponent implements OnInit {
               public dialog: MatDialog,
               public modalService: NgbModal) {
     this.getCertificates('any');
+    this.certsCopy = this.certs;
+    console.log(this.certsCopy);
   }
 
 
@@ -51,17 +54,23 @@ export class CertificatesPageComponent implements OnInit {
   public getCertificates(status) {
     console.log(localStorage.getItem('jwt'));
     return this.rest.getCertificatesByStatus(status)
-      .subscribe(data => this.certs = JSON.parse(data['body']));
+      .subscribe(data => {
+        this.certs = JSON.parse(data['body']);
+        this.certsCopy = this.certs;
+      });
   }
 
   public send(certificate: Certificate) {
     const ids = [certificate.id];
     const status = this.statusForm.getRawValue().status;
-    this.rest.modifyCertificatesStatus({ids, status}).subscribe(data => console.log(data));
+    const wut = {ids, status};
+    this.rest.modifyCertificatesStatus(wut).subscribe(data => {
+      console.log(data);
+      console.log(wut);
+    });
   }
 
-  public setAllAs() {
-    const status = this.allStatusForm.getRawValue().status;
+  public setAllAs(status: string) {
     this.certs.forEach(x => x.status = status);
     const ids = this.certs.map(x => x.id);
     const wut = {ids, status};
@@ -74,24 +83,30 @@ export class CertificatesPageComponent implements OnInit {
     return this.gb.isSuperUser();
   }
 
-  public filterSpecializations() {
-    this.certs = this.certs.filter(
-      x => x.specialization === this.specializationForm.getRawValue().specialization
-    );
+  public filterSpecializations(spec: string) {
+    if (spec === 'ALL') {
+      this.certs = this.certsCopy;
+    } else {
+      this.certs = this.certsCopy.filter(
+        x => x.specialization === spec
+      );
+    }
   }
 
 
-  public filterStatus() {
-    this.certs = this.certs.filter(
-      x => x.status === this.statusForm2.getRawValue().status
-    );
+  public filterStatus(status: string) {
+    if (status === 'any') this.certs = this.certsCopy;
+    else
+      this.certs = this.certsCopy.filter(
+        x => x.status.toLowerCase() === status.toLowerCase()
+      );
   }
 
 
   open(cert: Certificate) {
-     const modalRef =
+    const modalRef =
       this.modalService.open(CertificateModalBootstrapComponent);
-     modalRef.componentInstance.certificate = cert;
+    modalRef.componentInstance.certificate = cert;
   }
 
 }

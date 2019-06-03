@@ -1,27 +1,27 @@
 <div class="container">
-  <div class="buttons">
-    <button type="submit" class="btn btn-dark btn-success" (click)="getCertificates('any')">Show All</button>
-    <button type="submit" class="btn btn-dark btn-success" (click)="getCertificates('pending')">Show Pending</button>
-    <button type="submit" class="btn btn-dark btn-success" (click)="getCertificates('signing')">Show Signing</button>
-    <button type="submit" class="btn btn-dark btn-success" (click)="getCertificates('ready')">Show Ready</button>
-    <button type="submit" class="btn btn-dark btn-success" (click)="getCertificates('rejected')">Show Rejected</button>
-  </div>
-  <div class="buttons align-items-center justify-content-center" *ngIf="isSuperUser()">
-    <button type="submit" class="btn btn-dark btn-success" (click)="setAllAs()">Set all as</button>
-    <form [formGroup]="allStatusForm">
-      <div class="form-group mb-0">
-        <select class="custom-select" formControlName="status" required>
+  <div class="row">
+    <div class="col-12 top-buttons buttons align-items-center justify-content-around">
+      <div>
+        Show:
+        <select class="form-control" #st (change)="getCertificates(st.value)" class="custom-select" required>
+          <option value="any">All</option>
           <option value="pending">Pending</option>
           <option value="signing">Signing</option>
           <option value="ready">Ready</option>
           <option value="rejected">Rejected</option>
         </select>
       </div>
-    </form>
-    <button type="submit" class="btn btn-success btn-dark" (click)="filterSpecializations()">Select specialization</button>
-    <form [formGroup]="specializationForm">
-      <div class="form-group mb-0">
-        <select class="custom-select" formControlName="specialization" required>
+      <div *ngIf="isSuperUser()">
+        Set all as:
+        <select class="custom-select" #sa (change)="setAllAs(sa.value)" required>
+          <option value="pending">Pending</option>
+          <option value="signing">Signing</option>
+          <option value="ready">Ready</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+      <div *ngIf="isSuperUser()">Specialization:
+        <select class="custom-select" #sp (change)="filterSpecializations(sp.value.toUpperCase())" required>
           <option value="all">All</option>
           <option value="cti">CTI</option>
           <option value="cti-en">CTI-EN</option>
@@ -29,69 +29,59 @@
           <option value="is">IS</option>
         </select>
       </div>
-    </form><button type="submit" class="btn btn-success btn-dark" (click)="filterStatus()">Select status</button>
-    <form [formGroup]="statusForm2">
-      <div class="form-group mb-0">
-        <select class="custom-select" formControlName="status" required>
-          <option value="all">All</option>
-          <option value="pending">Pending</option>
-          <option value="signing">Signing</option>
-          <option value="ready">Ready</option>
-          <option value="rejected">Rejected</option>
-        </select>
-      </div>
-    </form>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">nr</th>
+          <th scope="col">date</th>
+          <th scope="col">specialization</th>
+          <th scope="col">name</th>
+          <th scope="col">study Year</th>
+          <th scope="col">university Year</th>
+          <th scope="col">frequency</th>
+          <th scope="col">mentions</th>
+          <th scope="col">purpose</th>
+          <th scope="col">status</th>
+          <th scope="col" *ngIf="isSuperUser()">Update</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let certificate of certs">
+          <th scope="row">{{certificate.id}}</th>
+          <th scope="row">{{certificate.created | date : 'medium'}}</th>
+          <th scope="row">{{certificate.specialization}}</th>
+          <th scope="row">{{certificate.name}}</th>
+          <th scope="row">{{certificate.studyYear}}</th>
+          <th scope="row">{{certificate.universityYear}}</th>
+          <th scope="row">{{certificate.frequency}}</th>
+          <th scope="row">{{certificate.mentions}}</th>
+          <th scope="row">{{certificate.purpose}}</th>
+          <th scope="row" *ngIf="!isSuperUser()">{{certificate.status}}</th>
+          <th scope="row" *ngIf="isSuperUser()">
+            <form [formGroup]="statusForm">
+              <div class="form-group">
+                <select class="custom-select" [value]='certificate.status' formControlName="status" required>
+                  <option value="pending">Pending</option>
+                  <option value="signing">Signing</option>
+                  <option value="ready">Ready</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+            </form>
+          </th>
+          <th scope="row" *ngIf="isSuperUser()">
+            <button type="submit" class="btn btn-success btn-dark" (click)="send(certificate)">Send</button>
+          </th>
+          <th scope="row">
+            <!--<app-certificate-modal [certificate]="certificate"></app-certificate-modal>-->
+            <button class="btn btn-success btn-dark" (click)="open(certificate)">Vezi</button>
+          </th>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <table class="table container-fluid">
-    <thead>
-    <tr>
-      <th scope="col">nr</th>
-      <th scope="col">date</th>
-      <th scope="col">specialization</th>
-      <th scope="col">name</th>
-      <th scope="col">study Year</th>
-      <th scope="col">university Year</th>
-      <th scope="col">frequency</th>
-      <th scope="col">mentions</th>
-      <th scope="col">purpose</th>
-      <th scope="col">status</th>
-      <th scope="col" *ngIf="isSuperUser()">Update</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let certificate of certs">
-      <th scope="row">{{certificate.id}}</th>
-      <th scope="row">{{certificate.created | date : 'medium'}}</th>
-      <th scope="row">{{certificate.specialization}}</th>
-      <th scope="row">{{certificate.name}}</th>
-      <th scope="row">{{certificate.studyYear}}</th>
-      <th scope="row">{{certificate.universityYear}}</th>
-      <th scope="row">{{certificate.frequency}}</th>
-      <th scope="row">{{certificate.mentions}}</th>
-      <th scope="row">{{certificate.purpose}}</th>
-      <th scope="row" *ngIf="!isSuperUser()">{{certificate.status}}</th>
-      <th scope="row" *ngIf="isSuperUser()">
-      <form [formGroup]="statusForm">
-          <div class="form-group">
-            <select class="custom-select" [value]='certificate.status' formControlName="status" required>
-              <option value="pending">Pending</option>
-              <option value="signing">Signing</option>
-              <option value="ready">Ready</option>
-              <option value="rejected">Rejected</option>
-            </select>
-          </div>
-        </form>
-      </th>
-      <th scope="row" *ngIf="isSuperUser()">
-        <button type="submit" class="btn btn-success btn-dark" (click)="send(certificate)">Send</button>
-      </th>
-      <th scope="row">
-        <!--<app-certificate-modal [certificate]="certificate"></app-certificate-modal>-->
-        <button class="btn btn-success btn-dark" (click)="open(certificate)">Vezi</button>
-      </th>
-    </tr>
-    </tbody>
-  </table>
-
 </div>
 
