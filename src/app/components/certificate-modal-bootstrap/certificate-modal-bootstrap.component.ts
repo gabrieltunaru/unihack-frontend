@@ -9,21 +9,18 @@ import {ExportAsConfig, ExportAsService} from 'ngx-export-as';
 })
 export class CertificateModalBootstrapComponent {
   @Input() public certificate;
-
+  private date = new Date();
   exportAsConfig: ExportAsConfig = {
-    type: 'pdf', // the type you want to download
-    elementId: 'certificate', // the id of html/table element
+    type: 'pdf',
+    elementId: 'certificate',
   };
 
   constructor(public activeModal: NgbActiveModal, private exportAsService: ExportAsService) {
   }
 
   export() {
-    // download the file using old school javascript method
-    this.exportAsService.save(this.exportAsConfig, 'My File Name').subscribe(() => {
-      // save started
+    this.exportAsService.save(this.exportAsConfig, 'adeverinta').subscribe(() => {
     });
-    // get the data as base64 or json object for json type - this will be helpful in ionic or SSR
     this.exportAsService.get(this.exportAsConfig).subscribe(content => {
       console.log(content);
     });

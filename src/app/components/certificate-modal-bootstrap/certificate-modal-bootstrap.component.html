@@ -1,27 +1,54 @@
-<div id="certificate">
-  <div class="modal-header">
-    <h4 class="modal-title">Adeverinta de student <br> <b>{{certificate.name}}</b></h4>
+<div class="fullwidth">
+  <div id="certificate" class="padding">
+    <div class="row">
+      <div class="col-6">
+        <div class="col-12"><b>UNIVERSITATEA POLITEHNICA TIMISOARA</b></div>
+        <div class="col-12"><b>Facultatea de Automatica si Calculatoare</b></div>
+        <div class="col-12"><b>Specializarea {{certificate.specialization}}</b></div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="col-12">
+            <img src="../../../assets/siglaUPT.jpg" class="sigla" alt="Sigla UPT">
+          </div>
+          <div class="col-12">
+            <p class="float-right">Nr. ..........................</p></div>
+          <div class="col-12">
+            <p class="float-right">Data: {{date | date}}</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <p>
+        Studenta/Studentul
+        <b>{{certificate.name}}</b>
+        este înscris/ă în anul universitar
+        <b>{{certificate.universityYear}}</b>
+        în anul
+        <b>{{certificate.studyYear}}</b>
+        de studii, cursuri
+        <b>{{certificate.frequency}}</b>.
+        <br>
+        Menţiuni:
+        <b>{{certificate.mentions}}</b>
+        <br>
+        Adeverinţa se eliberează pentru a-i servi la:
+        <b>{{certificate.purpose}}</b>
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-6 text-center">
+        <b >DECAN,</b>
+      </div>
+      <div class="col-6 text-center">
+        <b >SECRETAR SEF FACULTATE,</b>
+      </div>
+    </div>
+    <div class="whiteSpace"></div>
   </div>
-  <div class="modal-body">
-    <p>
-      Studenta/Studentul
-      <b>{{certificate.name}}</b>
-      este înscris/ă în anul universitar
-      <b>{{certificate.universityYear}}</b>
-      în anul
-      <b>{{certificate.studyYear}}</b>
-      de studii, cursuri
-      <b>{{certificate.frequency}}</b>.
-      <br>
-      Menţiuni:
-      <b>{{certificate.mentions}}</b>
-      <br>
-      Adeverinţa se eliberează pentru a-i servi la:
-      <b>{{certificate.purpose}}</b>
-    </p>
-  </div>
+
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-      <button type="button" class="btn btn-outline-dark" (click)="export()">Print</button>
+    <button type="button" class="btn btn-outline-dark" (click)="export()">Download</button>
   </div>
 </div>
