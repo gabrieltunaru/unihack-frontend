@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!printService.printing">
   <div class="row">
     <div class="col-12 top-buttons buttons align-items-center justify-content-around">
       <div>
@@ -75,7 +75,6 @@
             <button type="submit" class="btn btn-success btn-dark" (click)="send(certificate)">Send</button>
           </th>
           <th scope="row">
-            <!--<app-certificate-modal [certificate]="certificate"></app-certificate-modal>-->
             <button class="btn btn-success btn-dark" (click)="open(certificate)">Vezi</button>
           </th>
         </tr>

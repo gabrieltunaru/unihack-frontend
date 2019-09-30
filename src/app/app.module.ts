@@ -21,6 +21,8 @@ import {Overlay} from '@angular/cdk/overlay';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CertificateModalBootstrapComponent} from './components/certificate-modal-bootstrap/certificate-modal-bootstrap.component';
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import {ExportAsModule} from 'ngx-export-as';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
     JwtModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    NgbModalModule
+    NgbModalModule,
+    ExportAsModule
   ],
   entryComponents: [
     CertificateModalBootstrapComponent,

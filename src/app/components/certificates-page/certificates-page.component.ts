@@ -8,6 +8,7 @@ import {GlobalService} from '../../services/global.service';
 import {MatDialog} from '@angular/material';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CertificateModalBootstrapComponent} from '../certificate-modal-bootstrap/certificate-modal-bootstrap.component';
+import {PrintService} from '../../services/print.service';
 
 @Component({
   selector: 'app-certificates-page',
@@ -19,11 +20,13 @@ export class CertificatesPageComponent implements OnInit {
   public certs: Certificate[];
   private certsCopy: Certificate[];
   private selectedOption;
+  public viewing = false;
 
   constructor(private rest: RestService,
               private gb: GlobalService,
               public dialog: MatDialog,
-              public modalService: NgbModal) {
+              public modalService: NgbModal,
+              private printService: PrintService) {
     this.getCertificates('any');
     this.certsCopy = this.certs;
     console.log(this.certsCopy);
@@ -95,18 +98,23 @@ export class CertificatesPageComponent implements OnInit {
 
 
   public filterStatus(status: string) {
-    if (status === 'any') this.certs = this.certsCopy;
-    else
-      this.certs = this.certsCopy.filter(
-        x => x.status.toLowerCase() === status.toLowerCase()
-      );
+    if (status === 'any') {
+      this.certs = this.certsCopy;
+    } else
+      {
+        this.certs = this.certsCopy.filter(
+          x => x.status.toLowerCase() === status.toLowerCase()
+        );
+      }
   }
 
 
   open(cert: Certificate) {
+    this.printService.printing = true;
     const modalRef =
       this.modalService.open(CertificateModalBootstrapComponent);
     modalRef.componentInstance.certificate = cert;
+    modalRef.result.then(() => this.printService.printing = false);
   }
 
 }

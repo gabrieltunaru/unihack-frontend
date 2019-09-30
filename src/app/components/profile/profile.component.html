@@ -1,7 +1,7 @@
 <div class="container centered">
   <div class="inner-wrapper" >
     <h1>Edit profile</h1>
-    <form [formGroup]="profileForm" *ngIf="!profile" >
+    <form [formGroup]="profileForm"  >
       <div class="form-group">
         <label for="name">name</label>
         <input type="text" class="form-control" id="name" [value]="profile.name" formControlName="name"  required>
@@ -9,10 +9,10 @@
       <label>Specialization</label>
       <div class="form-group">
         <select class="custom-select" [value]="profile.specialization" formControlName="specialization" required>
-          <option value="cti">CTI</option>
-          <option value="is">IS</option>
-          <option value="cti-en">CTI-EN</option>
-          <option value="info">INFO</option>
+          <option value="CTI">CTI</option>
+          <option value="IS">IS</option>
+          <option value="CTI-EN">CTI-EN</option>
+          <option value="INFO">INFO</option>
         </select>
       </div>
       <div class="form-group">

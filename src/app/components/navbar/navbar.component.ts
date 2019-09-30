@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {GlobalService} from '../../services/global.service';
 import {Router} from '@angular/router';
 import {RestService} from '../../services/rest.service';
+import {PrintService} from '../../services/print.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(public gs: GlobalService,
               private rest: RestService,
-              private router: Router) {
+              private router: Router,
+              private printService: PrintService) {
     this.name = localStorage.getItem('userName');
   }
 
