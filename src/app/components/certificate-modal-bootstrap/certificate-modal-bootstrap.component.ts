@@ -19,10 +19,9 @@ export class CertificateModalBootstrapComponent {
   }
 
   export() {
-    this.exportAsService.save(this.exportAsConfig, 'adeverinta').subscribe(() => {
-    });
-    this.exportAsService.get(this.exportAsConfig).subscribe(content => {
-      console.log(content);
+    this.exportAsService
+      .save(this.exportAsConfig, 'adeverinta')
+      .subscribe(() => {
     });
   }
 }

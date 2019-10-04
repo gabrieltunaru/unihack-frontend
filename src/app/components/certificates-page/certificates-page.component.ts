@@ -55,10 +55,13 @@ export class CertificatesPageComponent implements OnInit {
   }
 
   public getCertificates(status) {
-    console.log(localStorage.getItem('jwt'));
     return this.rest.getCertificatesByStatus(status)
       .subscribe(data => {
-        this.certs = JSON.parse(data['body']);
+        console.log(this.certs);
+
+        this.certs = JSON.parse(data['body']).sort((a, b) => {
+          return new Date(a.created) < new Date(b.created) ? 1 : -1;
+        });
         this.certsCopy = this.certs;
       });
   }
@@ -91,7 +94,7 @@ export class CertificatesPageComponent implements OnInit {
       this.certs = this.certsCopy;
     } else {
       this.certs = this.certsCopy.filter(
-        x => x.specialization === spec
+        x => x.specialization.toLowerCase() === spec.toLowerCase()
       );
     }
   }
@@ -100,12 +103,11 @@ export class CertificatesPageComponent implements OnInit {
   public filterStatus(status: string) {
     if (status === 'any') {
       this.certs = this.certsCopy;
-    } else
-      {
-        this.certs = this.certsCopy.filter(
-          x => x.status.toLowerCase() === status.toLowerCase()
-        );
-      }
+    } else {
+      this.certs = this.certsCopy.filter(
+        x => x.status.toLowerCase() === status.toLowerCase()
+      );
+    }
   }
 
 
